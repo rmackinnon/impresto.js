@@ -1,4 +1,3 @@
-
 /* 
 	impresto.js
 	an extension to impress.js
@@ -66,7 +65,7 @@ else {
 		*/
 		function connect(server_url, talk_id) {
 			serverURL = server_url;
-			talkID = hash(document.body.innerHTML) + "-" + talk_id;	
+			talkID = talk_id;	
 			return api;
 		}
 
@@ -215,20 +214,6 @@ else {
 			}
 			return AJAX;
 		}
-
-		/* 
-			Generate a unique page ID
-			Described by http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
-		*/
-		function hash (str){
-		    var hash = 0, i, c;
-		    for (i = 0, l = str.length; i < l; i++) {
-		        c  = str.charCodeAt(i);
-		        hash  = ((hash<<5)-hash)+c;
-		        hash |= 0; // Convert to 32bit integer
-		    }
-		    return hash;
-		};
 
 	}
 }
