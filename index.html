@@ -7,10 +7,9 @@
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700' rel='stylesheet' type='text/css'>
     <style type="text/css">
-body {
-    font-family: 'Open Sans', sans-serif;    
-}
 #container {
+    font-family: 'Open Sans', sans-serif;    
+    font-size: 16px;
     position: absolute;
     width: 0;
     height: 0;
@@ -30,7 +29,12 @@ h1 {
     font-size: 28px;
     margin: 30px;
 }
+#desc {
+    position:relative;
+    top:-20px;
+}
 .button {
+    position: absolute;
     font-weight: 700;
     color:#fff;
     width: 180px;
@@ -39,8 +43,8 @@ h1 {
     font-size:27px;
     line-height: 80px;
     display: inline-block;
-    margin: 30px;
     cursor: pointer;
+    top:120px;
 
     transition: all 0.2s;
     -webkit-transition: all 0.2s;
@@ -49,14 +53,24 @@ h1 {
 }
 .button:hover {
     font-size: 30px;
-    margin: 20px;
     width: 200px;
     height: 90px;
+    top:115px;
     line-height: 90px;
     box-shadow: 4px 4px 12px 0px rgba(0,0,0,0.4);
 }
-.button#narrator {
+#b1 {
+    left:80px;
     background: #f08;
+}
+#b2 {
+    left:300px;
+}
+#b1:hover {
+    left:70px;
+}
+#b2:hover {
+    left:290px;
 }
     </style>
 </head>
@@ -64,10 +78,14 @@ h1 {
 <body>
     <div id="container">
         <div id="page">
-            <h1>Demo pages of impresto.js &nbsp;
-    <iframe src="http://ghbtns.com/github-btn.html?user=rmackinnon&repo=impresto.js&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe></h1>
-            <div class="button" id="narrator" onclick="openlink(true)">Narrator</div>
-            <div class="button" id="audience" onclick="openlink()">Audience</div>
+            <h1>Demo pages of <b>impresto.js</b> &nbsp;
+                <iframe src="http://ghbtns.com/github-btn.html?user=rmackinnon&repo=impresto.js&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+            </h1>
+            <div id="desc">
+                Impresto.js is an extension to impress.js that <br />syncs the slideshow progress cross multiple windows.
+            </div>
+            <div class="button" id="b1" onclick="openlink(true)">Narrator</div>
+            <div class="button" id="b2" onclick="openlink()">Audience</div>
         </div>
     </div>
     <script type="text/javascript">
