@@ -1,0 +1,84 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>impresto.js</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <style type="text/css">
+body {
+    font-family: 'Open Sans', sans-serif;    
+}
+#container {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    top:50%;
+}
+#page {
+    text-align: center;
+    position: relative;
+    width: 560px;
+    height: 320px;
+    top:-160px;
+    left:-280px;
+}
+h1 {
+    font-weight: 300;
+    font-size: 28px;
+    margin: 30px;
+}
+.button {
+    font-weight: 700;
+    color:#fff;
+    width: 180px;
+    height: 80px;
+    background: #08f;
+    font-size:27px;
+    line-height: 80px;
+    display: inline-block;
+    margin: 30px;
+    cursor: pointer;
+
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+}
+.button:hover {
+    font-size: 30px;
+    margin: 20px;
+    width: 200px;
+    height: 90px;
+    line-height: 90px;
+    box-shadow: 4px 4px 12px 0px rgba(0,0,0,0.4);
+}
+.button#narrator {
+    background: #f08;
+}
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="page">
+            <h1>Try the demo pages of impresto.js</h1>
+            <div class="button" id="narrator" onclick="open_link(true)">Narrator</div>
+            <div class="button" id="audience" onclick="open_link(false)">Audience</div>
+        </div>
+    </div>
+    <script type="text/javascript">
+var id = (""+Math.random()).replace(".","");
+var url = "demo.html";
+
+function open_link(as_narrator) {
+    window.open(url + (as_narrator? "?narrator&":"?") + "session=" + id);
+}
+    </script>
+</body>
+</html>
