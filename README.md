@@ -83,3 +83,7 @@ DIY Demo Running
 Sample php code requirements:
 - Memcached daemon or server
 - PECL-memcached
+
+OK Enough Show Me Already!
+--------------
+So you want to play with it huh?  Check out [http://rmackinnon.github.io/impresto.js/](http://rmackinnon.github.io/impresto.js/).
