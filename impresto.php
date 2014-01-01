@@ -60,8 +60,9 @@ class Mem {
 
         if($this->memcache->isPristine()) {
         	### Set default values
-	        $this->memcache->set('slideUpdateTime', 0);
+	        $this->memcache->set('updateTime', -SLIDE_UPDATE_TIMEOUT);
 	        $this->memcache->set('currentSlide', 0);
+	        $this->memcache->set('currentNarrator', 0);
 	    }
 	}
 
@@ -69,13 +70,17 @@ class Mem {
 		return $this->memcache->get('currentSlide');
 	}
 
-	public function setTalkSlide($slideID){
+	public function setTalkSlide($slideID, $narratorID){
 		return $this->memcache->set('currentSlide', $slideID) 
-				&& $this->memcache->set('slideUpdateTime', time());
+				&& $this->memcache->set('currentNarrator', $narratorID) 
+				&& $this->memcache->set('updateTime', time());
 	}
 
-	public function getTalkSlideUpdateTime(){
-		return $this->memcache->get('slideUpdateTime');
+	public function getTalkSlideUpdateTime($audienceID){
+		if($this->memcache->get('currentNarrator') == $audienceID) {
+			return -SLIDE_UPDATE_TIMEOUT;
+		}
+		return $this->memcache->get('updateTime');
 	}
 
 }
@@ -110,6 +115,7 @@ if(empty($json['talkID']) || empty($json['command'])) {
 
 $command = htmlspecialchars($json['command']);
 $talkID = htmlspecialchars($json['talkID']);
+$userID = htmlspecialchars($json['userID']);
 $mem = new Mem($talkID);
 
 switch ($command) {
@@ -120,7 +126,7 @@ switch ($command) {
 		} 
 		$slideID = htmlspecialchars($json['slideID']);
 
-		if($mem->setTalkSlide($slideID)) {
+		if($mem->setTalkSlide($slideID, $userID)) {
 			REPLY::accepted();
 		}
 		else {
@@ -139,7 +145,7 @@ switch ($command) {
 		for($h=0; $h<= HTTP_LONG_POLLING_TIMEOUT; $h++){
 			# If the slide has been updated within the last 10 minutes and after the last check, send the current slide id to client
 
-			$lastUpdate = $mem->getTalkSlideUpdateTime();
+			$lastUpdate = $mem->getTalkSlideUpdateTime($userID);
 			if ($lastUpdate != $lastClientUpdate
 				 && $lastUpdate > $lastClientUpdate - SLIDE_UPDATE_TIMEOUT ) {
 				REPLY::data(array(

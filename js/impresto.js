@@ -14,6 +14,7 @@ else {
 		var isNarrator = false;
 		var serverURL;
 		var talkID;
+		var userID = Math.random().toString(16).substr(2);
 
 		// Updating status
 		var send_error;
@@ -108,6 +109,7 @@ else {
 				command: "update_slide", 
 				talkID: talkID,
 				slideID: slideID,
+				userID: userID
 			};
 			
 			post(serverURL, 
@@ -145,7 +147,8 @@ else {
 			var passdata = {
 				command: "get_slide",
 				slideUpdateTime: timestamp, 
-				talkID: talkID
+				talkID: talkID,
+				userID: userID
 			}
 			post(serverURL, 
 				passdata,
